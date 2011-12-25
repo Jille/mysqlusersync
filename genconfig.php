@@ -34,6 +34,10 @@
 			arsort($passwords);
 			$passwords = array_keys($passwords);
 
+			if(count($out[$server]['users']) > 0) {
+				$out[$server]['users'][] = '';
+			}
+
 			$privlist = implode(', ', array_map('asphp', $privileges['*']->getGranted()));
 			$out[$server]['users'][] = '			$users['. asphp($username) .'] = new User('. asphp($username) .', '. asphp(array_keys($userhosts)) .', '. asphp($passwords[0]) .', new UserPrivileges('. $privlist .'));';
 
