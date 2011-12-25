@@ -1,8 +1,12 @@
 #!/bin/sh
 
-if [ -f config.php ]; then
-	echo "$0: config.php already exists. Bailing out." >&2
-	exit 1
+if [ "$1" = "-f" ]; then
+	shift
+else
+	if [ -f config.php ]; then
+		echo "$0: config.php already exists. Bailing out." >&2
+		exit 1
+	fi
 fi
 
 if [ -z "$1" ]; then
