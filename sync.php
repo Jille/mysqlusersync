@@ -90,6 +90,10 @@
 			}
 		}
 
+		if($queries) {
+			$queries[] = 'FLUSH PRIVILEGES;';
+		}
+
 		print('-- '. $server ."\n");
 		print(implode("\n", $queries) ."\n");
 	}
