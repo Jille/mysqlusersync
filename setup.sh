@@ -5,8 +5,16 @@ if [ -f config.php ]; then
 	exit 1
 fi
 
-read -p "Server: " SERVER
-read -p "Username: " DBUSER
+if [ -z "$1" ]; then
+	read -p "Server: " SERVER
+else
+	SERVER="$1"
+fi
+if [ -z "$2" ]; then
+	read -p "Username: " DBUSER
+else
+	DBUSER=$2
+fi
 # As it will appear in plain text anyway
 read -p "Password (plain text): " PASSWORD
 
