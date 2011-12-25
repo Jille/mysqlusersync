@@ -1,6 +1,6 @@
 <?php
 	require('functions.lib');
-	require('config.lib');
+	require('config.php');
 
 	$out = array();
 
