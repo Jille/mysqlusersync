@@ -35,6 +35,15 @@
 		}
 
 		public function addPrivileges($db, Privileges $privs) {
+			if($db == '*') {
+				if(!$privs instanceOf UserPrivileges) {
+					throw new MUSException('Argument give to addPrivileges('. $db .', $privs) is not instance of UserPrivileges');
+				}
+			} else {
+				if(!$privs instanceOf DBPrivileges) {
+					throw new MUSException('Argument give to addPrivileges('. $db .', $privs) is not instance of DBPrivileges');
+				}
+			}
 			$this->privileges[$db] = $privs;
 		}
 
