@@ -14,14 +14,6 @@
 		return $connection;
 	}
 
-	function mus_parsePrivilegeRow($row) {
-		$privileges = array();
-		foreach(mus_getPrivileges() as $priv) {
-			$privileges[$priv] = ($row[$priv .'_priv'] == 'Y');
-		}
-		return $privileges;
-	}
-
 	function mus_getPrivilegesFromMySQL($connection) {
 		$users = array();
 		$res = $connection->query("SELECT * FROM mysql.user");
