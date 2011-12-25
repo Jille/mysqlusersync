@@ -8,15 +8,14 @@
 
 		// ssl_*, x509_*, max_*
 
-		public function __construct($user, array $hosts, $password, UserPrivileges $privileges) {
+		public function __construct($user, array $hosts, $password) {
 			$this->user = $user;
 			$this->hosts = $hosts;
 			$this->password = $password;
-			$this->privileges['*'] = $privileges;
 		}
 
 		public function cloneForHosts($hosts) {
-			$user = new self($this->user, $hosts, $this->password, $this->privileges['*']);
+			$user = new self($this->user, $hosts, $this->password);
 			foreach($this->privileges as $db => $privs) {
 				$user->addPrivileges($db, clone $privs);
 			}
@@ -24,8 +23,9 @@
 		}
 
 		public static function createFromMySQLRecord($row) {
-			$privs = UserPrivileges::parseFromMySQLRecord($row);
-			return new User($row['User'], array($row['Host']), $row['Password'], $privs);
+			$user = new User($row['User'], array($row['Host']), $row['Password']);
+			$user->addPrivileges('*', UserPrivileges::parseFromMySQLRecord($row));
+			return $user;
 		}
 
 		public function addDBPrivilegesFromMySQLRecord($row) {
