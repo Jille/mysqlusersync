@@ -23,6 +23,10 @@
 
 		$res = $connection->query("SELECT * FROM mysql.db");
 		while($row = $res->fetch_assoc()) {
+			if(!isset($users[$row['User']][$row['Host']])) {
+				throw new MUSException('User '. $row['User'] .'@'. $row['Host'] .' has grants for '. $row['Db'] .'.* but has no user-record.');
+				# $users[$row['User']][$row['Host']] = new User($row['User'], array($row['Host']), '');
+			}
 			$users[$row['User']][$row['Host']]->addDBPrivilegesFromMySQLRecord($row);
 		}
 
