@@ -6,8 +6,8 @@
 		return var_export($str, true);
 	}
 
-	require('functions.php');
-	require('config.php');
+	require('functions.lib');
+	require('config.lib');
 
 	$out = array();
 

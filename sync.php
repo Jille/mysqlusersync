@@ -1,5 +1,5 @@
 <?php
-	require('functions.php');
+	require('functions.lib');
 	require('config.php');
 
 	foreach($servers as $server => $info) {

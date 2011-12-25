@@ -1,6 +1,6 @@
 <?php
-	require('privileges.php');
-	require('user.php');
+	require('privileges.lib');
+	require('user.lib');
 
 	foreach(UserPrivileges::ls() as $priv) {
 		define('PRIV_'. strtoupper($priv), $priv);
