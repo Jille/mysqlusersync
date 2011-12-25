@@ -1,11 +1,4 @@
 <?php
-	function asphp($str) {
-		if(is_array($str) && $str == array_values($str)) {
-			return 'array('. implode(', ', array_map('asphp', $str)) .')';
-		}
-		return var_export($str, true);
-	}
-
 	require('functions.lib');
 	require('config.lib');
 
