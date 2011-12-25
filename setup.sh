@@ -27,6 +27,15 @@ echo '		),' >> config.php
 echo '	);' >> config.php
 echo '' >> config.php
 php genconfig.php >> config.php-current
+OK=$?
 sed 's/^/	/g' < config.php-current >> config.php
 rm config.php-current
 echo '?>' >> config.php
+
+if [ "$OK" = "0" ]; then
+	echo "Configuration seems to be generated in config.php"
+else
+	echo "There seems to be an error."
+	cat config.php
+	exit "$OK"
+fi
