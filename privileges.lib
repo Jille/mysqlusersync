@@ -47,13 +47,13 @@
 		}
 
 		static public function ls() {
-			return static::$privileges;
+			return array_values(static::$privileges);
 		}
 
 		static public function parseFromMySQLRecord($row) {
 			$privileges = array();
-			foreach(static::$privileges as $priv) {
-				if($row[$priv .'_priv'] == 'Y') {
+			foreach(static::$privileges as $column => $priv) {
+				if($row[$column .'_priv'] == 'Y') {
 					$privileges[] = $priv;
 				}
 			}
@@ -62,10 +62,10 @@
 	}
 
 	class DBPrivileges extends Privileges {
-		static $privileges = array('Select', 'Insert', 'Update', 'Delete', 'Create', 'Drop', 'Grant', 'References', 'Index', 'Alter', 'Create_tmp_table', 'Lock_tables', 'Execute', 'Create_view', 'Show_view', 'Create_routine', 'Alter_routine', 'Event', 'Trigger');
+		static $privileges = array('Select' => 'SELECT', 'Insert' => 'INSERT', 'Update' => 'UPDATE', 'Delete' => 'DELETE', 'Create' => 'CREATE', 'Drop' => 'DROP', 'Grant' => 'GRANT OPTION', 'References' => 'REFERENCES', 'Index' => 'INDEX', 'Alter' => 'ALTER', 'Create_tmp_table' => 'CREATE TEMPORARY TABLES', 'Lock_tables' => 'LOCK TABLES', 'Execute' => 'EXECUTE', 'Create_view' => 'CREATE VIEW', 'Show_view' => 'SHOW VIEW', 'Create_routine' => 'CREATE ROUTINE', 'Alter_routine' => 'ALTER ROUTINE', 'Event' => 'EVENT', 'Trigger' => 'TRIGGER');
 	}
 
 	class UserPrivileges extends Privileges {
-		static $privileges = array('Select', 'Insert', 'Update', 'Delete', 'Create', 'Drop', 'Reload', 'Shutdown', 'Process', 'File', 'Grant', 'References', 'Index', 'Alter', 'Show_db', 'Super', 'Create_tmp_table', 'Lock_tables', 'Execute', 'Repl_slave', 'Repl_client', 'Create_view', 'Show_view', 'Create_routine', 'Alter_routine', 'Create_user', 'Event', 'Trigger');
+		static $privileges = array('Select' => 'SELECT', 'Insert' => 'INSERT', 'Update' => 'UPDATE', 'Delete' => 'DELETE', 'Create' => 'CREATE', 'Drop' => 'DROP', 'Reload' => 'RELOAD', 'Shutdown' => 'SHUTDOWN', 'Process' => 'PROCESS', 'File' => 'FILE', 'Grant' => 'GRANT OPTION', 'References' => 'REFERENCES', 'Index' => 'INDEX', 'Alter' => 'ALTER', 'Show_db' => 'SHOW DATABASES', 'Super' => 'SUPER', 'Create_tmp_table' => 'CREATE TEMPORARY TABLES', 'Lock_tables' => 'LOCK TABLES', 'Execute' => 'EXECUTE', 'Repl_slave' => 'REPLICATION SLAVE', 'Repl_client' => 'REPLICATION CLIENT', 'Create_view' => 'CREATE VIEW', 'Show_view' => 'SHOW VIEW', 'Create_routine' => 'CREATE ROUTINE', 'Alter_routine' => 'ALTER ROUTINE', 'Create_user' => 'CREATE USER', 'Event' => 'EVENT', 'Trigger' => 'TRIGGER');
 	}
 ?>
