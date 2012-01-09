@@ -36,8 +36,10 @@
 			}
 
 			$out[$server]['users'][] = '			$users['. asphp($username) .'] = new User('. asphp($username) .', '. asphp(array_keys($userhosts)) .', '. asphp($passwords[0]) .');';
-			$privlist = implode(', ', array_map('asphp', $privileges['*.*']->getGranted()));
-			$out[$server]['users'][] = '			$users['. asphp($username) .']->addPrivileges(\'*.*\', new UserPrivileges('. $privlist .'));';
+			if(isset($privileges['*.*'])) {
+				$privlist = implode(', ', array_map('asphp', $privileges['*.*']->getGranted()));
+				$out[$server]['users'][] = '			$users['. asphp($username) .']->addPrivileges(\'*.*\', new UserPrivileges('. $privlist .'));';
+			}
 
 			foreach($privileges as $db => $dbprivs) {
 				if($db == '*.*') {
