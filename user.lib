@@ -24,7 +24,7 @@
 
 		public static function createFromMySQLRecord($row) {
 			$user = new User($row['User'], array($row['Host']), $row['Password']);
-			$user->addPrivileges('*', UserPrivileges::parseFromMySQLRecord($row));
+			$user->addPrivileges('*.*', UserPrivileges::parseFromMySQLRecord($row));
 			return $user;
 		}
 
@@ -35,7 +35,7 @@
 		}
 
 		public function addPrivileges($db, Privileges $privs) {
-			if($db == '*') {
+			if($db == '*.*') {
 				if(!$privs instanceOf UserPrivileges) {
 					throw new MUSException('Argument give to addPrivileges('. $db .', $privs) is not instance of UserPrivileges');
 				}
