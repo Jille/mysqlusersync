@@ -18,7 +18,11 @@
 				$passwords[] = $user->password;
 				foreach($user->privileges as $db => $dbprivs) {
 					if(!isset($privileges[$db])) {
-						$privileges[$db] = new DBPrivileges();
+						if($db == '*.*') {
+							$privileges[$db] = new UserPrivileges();
+						} else {
+							$privileges[$db] = new DBPrivileges();
+						}
 					}
 					$privileges[$db]->grantList($dbprivs->getGranted());
 				}

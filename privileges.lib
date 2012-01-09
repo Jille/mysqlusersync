@@ -13,10 +13,16 @@
 		}
 
 		public function grant($priv) {
+			if(!in_array($priv, static::$privileges)) {
+				throw new MUSException(substr(get_class($this), 0, -1) .' '. $priv .' does not exist');
+			}
 			$this->rights[$priv] = true;
 		}
 
 		public function revoke($priv) {
+			if(!in_array($priv, static::$privileges)) {
+				throw new MUSException(get_class($this) .' '. $priv .' does not exist');
+			}
 			$this->rights[$priv] = false;
 		}
 
