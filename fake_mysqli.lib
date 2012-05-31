@@ -1,0 +1,34 @@
+<?php
+	class MySQLi {
+		public $connect_error = NULL;
+		private $db;
+
+		function __construct($host, $user, $pass) {
+			$this->db = @mysql_connect($host, $user, $pass);
+			if(!$this->db) {
+				$err = error_get_last();
+				$this->connect_error = $err['message'];
+			}
+		}
+
+		function query($sql) {
+			$res = mysql_query($sql, $this->db);
+			if(is_resource($res)) {
+				return new MySQLi_result($res);
+			}
+			return $res;
+		}
+	}
+
+	class MySQLi_result {
+		private $res;
+
+		function __construct($res) {
+			$this->res = $res;
+		}
+
+		function fetch_assoc() {
+			return mysql_fetch_assoc($this->res);
+		}
+	}
+?>

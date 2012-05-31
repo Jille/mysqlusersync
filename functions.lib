@@ -1,6 +1,9 @@
 <?php
 	require('privileges.lib');
 	require('user.lib');
+	if(!class_exists('MySQLi')) {
+		require('fake_mysqli.lib');
+	}
 
 	foreach(UserPrivileges::ls() as $priv) {
 		define('PRIV_'. strtoupper($priv), $priv);
